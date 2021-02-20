@@ -18,7 +18,7 @@ import mk.iwec.bookshelf.service.GenericService;
 @Transactional
 public class PublisherServiceImpl implements GenericService<Publisher, Integer> {
 	@Autowired
-	public PublisherRepository repository;
+	private PublisherRepository repository;
 
 	@Override
 	public Publisher findById(Integer id) {

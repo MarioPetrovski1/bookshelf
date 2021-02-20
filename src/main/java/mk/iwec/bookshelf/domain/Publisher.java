@@ -14,19 +14,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "publishers")
-public class Publisher {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+public class Publisher extends BaseObject {
 
 	@Column(name = "name", nullable = false, length = 100, unique = true)
-	@NonNull
 	private String name;
 
 }
