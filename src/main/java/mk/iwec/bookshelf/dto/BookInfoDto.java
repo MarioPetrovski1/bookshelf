@@ -21,7 +21,7 @@ public class BookInfoDto {
 
     private Book.Genre genre;
 
-    private Map<String,String> authors;
+    private Map<String,Object> authors;
 
 
     public BookInfoDto(Book book) {
@@ -31,7 +31,9 @@ public class BookInfoDto {
             this.isbn = book.getIsbn();
             this.genre = book.getGenre();
             authors = new HashMap<>();
-            book.getAuthors().forEach(author -> authors.put("fullname",author.getFirstName() + " " +author.getLastName()));
+            book.getAuthors().forEach(author -> authors.put("id", author.getId()));
+            book.getAuthors().forEach(author -> authors.put("firstName", author.getFirstName()));
+            book.getAuthors().forEach(author -> authors.put("lastName", author.getLastName()));
         }
     }
 

@@ -22,7 +22,7 @@ public class AuthorInfoDto {
 
     private String lastName;
 
-    private Map<String,String> bookNames;
+    private Map<String,Object> bookNames;
 
     public AuthorInfoDto(Author author) {
         if(author != null) {
@@ -30,7 +30,10 @@ public class AuthorInfoDto {
             this.firstName = author.getFirstName();
             this.lastName = author.getLastName();
             bookNames = new HashMap<>();
+            author.getBooks().forEach(book -> bookNames.put("id", book.getId()));
             author.getBooks().forEach(book -> bookNames.put("title",book.getTitle()));
+            author.getBooks().forEach(book -> bookNames.put("isbn", book.getIsbn()));
+            author.getBooks().forEach(book -> bookNames.put("genre",book.getGenre()));
         }
     }
 
