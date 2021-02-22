@@ -18,12 +18,12 @@ public class AuthorMapperImpl extends AbstractGeneralMapper implements AuthorMap
 
     @Override
     public AuthorDto entityToDto(Author author) {
-        return this.modelMapper.map(author , AuthorDto.class);
+        return this.modelMapper.map(author, AuthorDto.class);
     }
 
     @Override
     public Author dtoToEntity(AuthorDto authorDto) {
-        return this.modelMapper.map(authorDto , Author.class);
+        return this.modelMapper.map(authorDto, Author.class);
     }
 
     @Override

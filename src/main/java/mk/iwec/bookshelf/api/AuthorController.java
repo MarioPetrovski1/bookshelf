@@ -30,7 +30,7 @@ public class AuthorController {
 
     @GetMapping
     public List<AuthorInfoDto> findAll() {
-        return new ArrayList<AuthorInfoDto>(mapper.mapList(service.findAll(),AuthorInfoDto.class));
+        return new ArrayList<AuthorInfoDto>(mapper.mapList(service.findAll(), AuthorInfoDto.class));
     }
 
     @PostMapping

@@ -1,7 +1,11 @@
 package mk.iwec.bookshelf.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import mk.iwec.bookshelf.dto.PublisherDto;
+import mk.iwec.bookshelf.dto.PublisherInfoDto;
+import mk.iwec.bookshelf.mapper.PublisherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,34 +26,37 @@ import mk.iwec.bookshelf.service.impl.PublisherServiceImpl;
 @RequestMapping(Endpoints.PUBLISHERS)
 public class PublisherController {
 
-	@Autowired
-	private PublisherServiceImpl service;
+    @Autowired
+    private PublisherServiceImpl service;
 
-	@GetMapping("/{id}")
-	public Publisher findById(@PathVariable(value = "id") Integer id) {
-		return service.findById(id);
-	}
+    @Autowired
+    private PublisherMapper mapper;
 
-	@GetMapping
-	public List<Publisher> findAll() {
-		return service.findAll();
-	}
+    @GetMapping("/{id}")
+    public PublisherInfoDto findById(@PathVariable(value = "id") Integer id) {
+        return new PublisherInfoDto(mapper.dtoToEntity(service.findById(id)));
+    }
 
-	@PostMapping
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public Publisher create(@RequestBody Publisher entity) {
-		return service.create(entity);
-	}
+    @GetMapping
+    public List<PublisherInfoDto> findAll() {
+        return new ArrayList<PublisherInfoDto>(mapper.mapList(service.findAll(), PublisherInfoDto.class));
+    }
 
-	@PutMapping("/{id}")
-	@ResponseStatus(value = HttpStatus.OK)
-	public Publisher update(@PathVariable(value = "id") Integer id, @RequestBody Publisher entity) {
-		return service.update(id, entity);
-	}
+    @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public PublisherDto create(@RequestBody PublisherDto publisherDto) {
+        return service.create(publisherDto);
+    }
 
-	@DeleteMapping("/{id}")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteById(@PathVariable(value = "id") Integer id) {
-		service.deleteById(id);
-	}
+    @PutMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public PublisherDto update(@PathVariable(value = "id") Integer id, @RequestBody PublisherDto publisherDto) {
+        return service.update(id, publisherDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable(value = "id") Integer id) {
+        service.deleteById(id);
+    }
 }

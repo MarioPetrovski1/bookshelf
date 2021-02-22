@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import mk.iwec.bookshelf.dto.PublisherDto;
+import mk.iwec.bookshelf.mapper.PublisherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,47 +18,50 @@ import mk.iwec.bookshelf.service.GenericService;
 @Service
 @Slf4j
 @Transactional
-public class PublisherServiceImpl implements GenericService<Publisher, Integer> {
-	@Autowired
-	private PublisherRepository repository;
+public class PublisherServiceImpl implements GenericService<PublisherDto, Integer> {
 
-	@Override
-	public Publisher findById(Integer id) {
-		Publisher entity = repository.findById(id).orElseThrow(() -> {
-			log.error("Resource Publisher with id {} is not found", id);
-			return new ResourceNotFoundException("Resource Publisher not found");
-		});
+    @Autowired
+    private PublisherRepository repository;
 
-		return entity;
-	}
+    @Autowired
+    private PublisherMapper publisherMapper;
 
-	@Override
-	public List<Publisher> findAll() {
-		log.debug("Execute findAll Publisher");
-		return repository.findAll();
-	}
+    @Override
+    public PublisherDto findById(Integer id) {
+        Publisher entity = repository.findById(id).orElseThrow(() -> {
+            log.error("Resource Publisher with id {} is not found", id);
+            return new ResourceNotFoundException("Resource Publisher not found");
+        });
 
-	@Override
-	public Publisher create(Publisher entity) {
-		log.debug("Execute create Publisher with parameters ", entity);
-		Publisher persistedEntity = repository.save(entity);
-		return persistedEntity;
-	}
+        return publisherMapper.entityToDto(entity);
+    }
 
-	@Override
-	public Publisher update(Integer id, Publisher entity) {
-		log.debug("Execute update Publisher with parameters {}", entity);
-		Publisher persistedEntity = findById(id);
+    @Override
+    public List<PublisherDto> findAll() {
+        log.debug("Execute findAll Publisher");
+        return publisherMapper.mapList(repository.findAll(), PublisherDto.class);
+    }
 
-		// TODO use mapper
-		persistedEntity.setName(entity.getName());
-		return repository.saveAndFlush(persistedEntity);
-	}
+    @Override
+    public PublisherDto create(PublisherDto publisherDto) {
+        log.debug("Execute create Publisher with parameters ", publisherDto);
+        Publisher transientPublisher = publisherMapper.dtoToEntity(publisherDto);
+        Publisher persistedPublisher = repository.save(transientPublisher);
+        return publisherMapper.entityToDto(persistedPublisher);
+    }
 
-	@Override
-	public void deleteById(Integer id) {
-		log.debug("Execute deleteById Publisher with parameters {}", id);
-		repository.deleteById(id);
-	}
+    @Override
+    public PublisherDto update(Integer id, PublisherDto publisherDto) {
+        log.debug("Execute update Publisher with parameters {}", publisherDto);
+        Publisher persistedEntity = publisherMapper.dtoToEntity(publisherDto);
+        publisherMapper.mapRequestedFieldForUpdate(persistedEntity, publisherDto);
+        return publisherMapper.entityToDto(repository.saveAndFlush(persistedEntity));
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        log.debug("Execute deleteById Publisher with parameters {}", id);
+        repository.deleteById(id);
+    }
 
 }

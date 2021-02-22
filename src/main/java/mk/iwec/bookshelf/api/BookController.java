@@ -30,19 +30,19 @@ public class BookController {
 
     @GetMapping
     public List<BookInfoDto> findAll() {
-        return new ArrayList<BookInfoDto>(mapper.mapList(service.findAll(),BookInfoDto.class));
+        return new ArrayList<BookInfoDto>(mapper.mapList(service.findAll(), BookInfoDto.class));
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public BookDto create(@RequestBody BookDto entity) {
-        return service.create(entity);
+    public BookDto create(@RequestBody BookDto bookDto) {
+        return service.create(bookDto);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public BookDto update(@PathVariable(value = "id") Integer id, @RequestBody BookDto entity) {
-        return service.update(id, entity);
+    public BookDto update(@PathVariable(value = "id") Integer id, @RequestBody BookDto bookDto) {
+        return service.update(id, bookDto);
     }
 
     @DeleteMapping("/{id}")
