@@ -1,17 +1,14 @@
 package mk.iwec.bookshelf.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +17,17 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "publishers")
 public class Publisher extends BaseObject {
 
-	@Column(name = "name", nullable = false, length = 100, unique = true)
-	private String name;
+    @Column(name = "name", nullable = false, length = 100, unique = true)
+    private String name;
+
+    @Column(name = "country", nullable = false, length = 100)
+    private String country;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "book_publisher",
+            joinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    private List<Book> books;
+
 
 }

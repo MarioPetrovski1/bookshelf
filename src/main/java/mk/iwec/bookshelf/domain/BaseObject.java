@@ -17,6 +17,4 @@ public class BaseObject implements Serializable {
     private Integer id;
 
 
-
-
 }

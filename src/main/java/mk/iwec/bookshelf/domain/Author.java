@@ -14,19 +14,19 @@ import java.util.List;
 @AllArgsConstructor
 public class Author extends BaseObject {
 
-    @Column(name = "first_name" , nullable = false , length = 100)
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @Column(name = "last_name" , nullable = false , length = 100)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "book_authors",
-            joinColumns = @JoinColumn(name = "author_id" , referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id" , referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     private List<Book> books;
 
-    @Column(name = "sex" , nullable = false , length = 100)
+    @Column(name = "sex", nullable = false, length = 100)
     @Enumerated(EnumType.STRING)
     private Sex sex;
 

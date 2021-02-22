@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ExceptionResponse {
-	private HttpStatus httpStatus;
-	private String errorMessage;
-	private Timestamp timestamp;
+    private HttpStatus httpStatus;
+    private String errorMessage;
+    private Timestamp timestamp;
 }

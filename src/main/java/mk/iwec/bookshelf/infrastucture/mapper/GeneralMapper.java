@@ -2,9 +2,9 @@ package mk.iwec.bookshelf.infrastucture.mapper;
 
 import java.util.List;
 
-public interface GeneralMapper<Dto,Entity> {
+public interface GeneralMapper<Dto, Entity> {
 
-    public Dto entityToDto (Entity entity);
+    public Dto entityToDto(Entity entity);
 
     public Entity dtoToEntity(Dto dto);
 

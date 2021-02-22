@@ -18,12 +18,12 @@ public class BookMapperImpl extends AbstractGeneralMapper implements BookMapper 
 
     @Override
     public BookDto entityToDto(Book book) {
-        return this.modelMapper.map(book , BookDto.class);
+        return this.modelMapper.map(book, BookDto.class);
     }
 
     @Override
     public Book dtoToEntity(BookDto bookDto) {
-        return this.modelMapper.map(bookDto , Book.class);
+        return this.modelMapper.map(bookDto, Book.class);
     }
 
     @Override
@@ -32,5 +32,6 @@ public class BookMapperImpl extends AbstractGeneralMapper implements BookMapper 
         entity.setIsbn(dto.getIsbn());
         entity.setGenre(dto.getGenre());
         entity.setAuthors(dto.getAuthors());
+        entity.setPublisher(dto.getPublisher());
     }
 }
