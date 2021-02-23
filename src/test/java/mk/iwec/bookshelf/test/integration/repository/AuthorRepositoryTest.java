@@ -1,9 +1,9 @@
-package mk.iwec.bookshelf.test.integration.integration.repository;
+package mk.iwec.bookshelf.test.integration.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.repository.AuthorRepository;
-import mk.iwec.bookshelf.test.integration.utils.AuthorTestUtil;
+import mk.iwec.bookshelf.test.utils.AuthorTestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
