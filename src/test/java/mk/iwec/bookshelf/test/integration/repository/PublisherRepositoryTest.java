@@ -1,28 +1,26 @@
 package mk.iwec.bookshelf.test.integration.repository;
 
+
 import lombok.extern.slf4j.Slf4j;
-import mk.iwec.bookshelf.domain.Book;
-import mk.iwec.bookshelf.repository.BookRepository;
-import mk.iwec.bookshelf.test.utils.BookTestUtil;
+import mk.iwec.bookshelf.domain.Publisher;
+import mk.iwec.bookshelf.repository.PublisherRepository;
+import mk.iwec.bookshelf.test.utils.PublisherTestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import javax.transaction.Transactional;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 @Slf4j
-public class BookRepositoryTest {
+public class PublisherRepositoryTest {
     @Autowired
-    private BookRepository repository;
+    private PublisherRepository repository;
 
     @Test
     public void injectedComponentsAreNotNull() {
@@ -30,15 +28,11 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void getAllBooks() {
-        Book mock = BookTestUtil.createMockBookEntity();
+    public void getAllPublishers() {
+        Publisher mock = PublisherTestUtil.createMockPublisherEntity();
         repository.save(mock);
 
-        List<Book> bookList = repository.findAll();
-        assertThat(bookList).isNotEmpty();
+        List<Publisher> publisherList = repository.findAll();
+        assertThat(publisherList).isNotEmpty();
     }
-
-
-    // TODO: Create remaining tests
-
 }
