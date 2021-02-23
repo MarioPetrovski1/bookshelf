@@ -1,22 +1,19 @@
-package mk.iwec.bookshelf.test.integration.integration.controller;
+package mk.iwec.bookshelf.test.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.dto.AuthorDto;
-import mk.iwec.bookshelf.dto.AuthorInfoDto;
 import mk.iwec.bookshelf.infrastucture.Endpoints;
 import mk.iwec.bookshelf.service.impl.AuthorServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-import mk.iwec.bookshelf.test.integration.utils.AuthorTestUtil;
+import mk.iwec.bookshelf.test.utils.AuthorTestUtil;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -28,7 +25,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;

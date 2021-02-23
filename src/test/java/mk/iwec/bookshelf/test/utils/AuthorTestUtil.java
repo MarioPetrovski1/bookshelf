@@ -1,4 +1,4 @@
-package mk.iwec.bookshelf.test.integration.utils;
+package mk.iwec.bookshelf.test.utils;
 
 import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.dto.AuthorDto;
