@@ -22,7 +22,7 @@ public class AuthorInfoDto {
 
     private Author.Sex sex;
 
-    private List<BookShortInfoDto> books;
+    private List<BookShortInfoWithPublisher> books;
 
     public AuthorInfoDto(Author author) {
         if (author != null) {
@@ -31,9 +31,17 @@ public class AuthorInfoDto {
             this.lastName = author.getLastName();
             this.sex = author.getSex();
             books = new ArrayList<>();
+            PublisherShortInfoDto publisher;
             List<Book> tempBooks = author.getBooks();
             for (Book b : tempBooks) {
-                BookShortInfoDto book = new BookShortInfoDto(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre());
+                if (b.getPublisher() != null) {
+                    publisher =
+                            new PublisherShortInfoDto(b.getPublisher().getId(), b.getPublisher().getName(), b.getPublisher().getCountry());
+                } else {
+                    publisher = null;
+                }
+                BookShortInfoWithPublisher book =
+                        new BookShortInfoWithPublisher(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre(), publisher);
                 books.add(book);
             }
         }
