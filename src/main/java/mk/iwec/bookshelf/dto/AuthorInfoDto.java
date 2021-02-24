@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mk.iwec.bookshelf.domain.Author;
+import mk.iwec.bookshelf.domain.Book;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class AuthorInfoDto {
 
     private Author.Sex sex;
 
-    private Map<String, Object> books;
+    private List<BookShortInfoDto> books;
 
     public AuthorInfoDto(Author author) {
         if (author != null) {
@@ -29,11 +30,12 @@ public class AuthorInfoDto {
             this.firstName = author.getFirstName();
             this.lastName = author.getLastName();
             this.sex = author.getSex();
-            books = new HashMap<>();
-            author.getBooks().forEach(book -> books.put("id", book.getId()));
-            author.getBooks().forEach(book -> books.put("title", book.getTitle()));
-            author.getBooks().forEach(book -> books.put("isbn", book.getIsbn()));
-            author.getBooks().forEach(book -> books.put("genre", book.getGenre()));
+            books = new ArrayList<>();
+            List<Book> tempBooks = author.getBooks();
+            for (Book b : tempBooks) {
+                BookShortInfoDto book = new BookShortInfoDto(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre());
+                books.add(book);
+            }
         }
     }
 

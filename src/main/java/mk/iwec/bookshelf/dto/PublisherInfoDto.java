@@ -3,10 +3,11 @@ package mk.iwec.bookshelf.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mk.iwec.bookshelf.domain.Book;
 import mk.iwec.bookshelf.domain.Publisher;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,18 +20,19 @@ public class PublisherInfoDto {
 
     private String country;
 
-    private Map<String, Object> books;
+    private List<BookShortInfoDto> books;
 
     public PublisherInfoDto(Publisher publisher) {
         if (publisher != null) {
             this.id = publisher.getId();
             this.name = publisher.getName();
             this.country = publisher.getCountry();
-            books = new HashMap<>();
-            publisher.getBooks().forEach(book -> books.put("id", book.getId()));
-            publisher.getBooks().forEach(book -> books.put("title", book.getTitle()));
-            publisher.getBooks().forEach(book -> books.put("isbn", book.getIsbn()));
-            publisher.getBooks().forEach(book -> books.put("genre", book.getGenre()));
+            books = new ArrayList<>();
+            List<Book> tempBooks = publisher.getBooks();
+            for (Book b : tempBooks) {
+                BookShortInfoDto book = new BookShortInfoDto(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre());
+                books.add(book);
+            }
         }
     }
 
