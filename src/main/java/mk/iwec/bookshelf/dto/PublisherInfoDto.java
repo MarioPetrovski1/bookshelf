@@ -3,6 +3,7 @@ package mk.iwec.bookshelf.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.domain.Book;
 import mk.iwec.bookshelf.domain.Publisher;
 
@@ -20,7 +21,7 @@ public class PublisherInfoDto {
 
     private String country;
 
-    private List<BookShortInfoDto> books;
+    private List<BookShortInfoWithAuthors> books;
 
     public PublisherInfoDto(Publisher publisher) {
         if (publisher != null) {
@@ -28,9 +29,16 @@ public class PublisherInfoDto {
             this.name = publisher.getName();
             this.country = publisher.getCountry();
             books = new ArrayList<>();
+            List<AuthorShortInfoDto> authors = new ArrayList<>();
             List<Book> tempBooks = publisher.getBooks();
             for (Book b : tempBooks) {
-                BookShortInfoDto book = new BookShortInfoDto(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre());
+                if (b.getAuthors() != null) {
+                    for (Author a : b.getAuthors()) {
+                        AuthorShortInfoDto author = new AuthorShortInfoDto(a.getId(), a.getFirstName(), a.getLastName());
+                        authors.add(author);
+                    }
+                }
+                BookShortInfoWithAuthors book = new BookShortInfoWithAuthors(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre(), authors);
                 books.add(book);
             }
         }
