@@ -82,7 +82,7 @@ public class AuthorServiceImpl implements GenericService<AuthorDto, Integer> {
         if (bookDto.getPublisher().getId() != null) {
             Publisher publisher = publisherRepository.findById(bookDto.getPublisher().getId()).orElseThrow(() -> {
                 log.error("Resource Publisher with id {} is not found", id);
-                return new ResourceNotFoundException("Resource Author not found");
+                return new ResourceNotFoundException("Resource Publisher not found");
             });
             bookDto.setPublisher(publisher);
         }
