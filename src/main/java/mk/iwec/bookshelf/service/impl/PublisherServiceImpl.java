@@ -14,6 +14,7 @@ import mk.iwec.bookshelf.dto.PublisherDto;
 import mk.iwec.bookshelf.mapper.BookMapper;
 import mk.iwec.bookshelf.mapper.PublisherMapper;
 import mk.iwec.bookshelf.repository.AuthorRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,8 +84,17 @@ public class PublisherServiceImpl implements GenericService<PublisherDto, Intege
             log.error("Resource Publisher with id {} is not found", id);
             return new ResourceNotFoundException("Resource Publisher not found");
         });
-        List<Author> authors = book.getAuthors();
+        checkForAuthors(book, authorRepository, log);
 
+        List<BookDto> books = bookMapper.mapList(entity.getBooks(), BookDto.class);
+        books.add(book);
+        entity.setBooks(bookMapper.mapList(books, Book.class));
+        return publisherMapper.entityToDto(repository.saveAndFlush(entity));
+
+    }
+
+    public static void checkForAuthors(BookDto book, AuthorRepository authorRepository, Logger log) {
+        List<Author> authors = book.getAuthors();
         List<Author> persistedAuthors = new ArrayList<>();
         for (Author a : authors) {
             if (a.getId() != null) {
@@ -100,12 +110,6 @@ public class PublisherServiceImpl implements GenericService<PublisherDto, Intege
         if (persistedAuthors.size() > 0) {
             book.setAuthors(persistedAuthors);
         }
-
-        List<BookDto> books = bookMapper.mapList(entity.getBooks(), BookDto.class);
-        books.add(book);
-        entity.setBooks(bookMapper.mapList(books, Book.class));
-        return publisherMapper.entityToDto(repository.saveAndFlush(entity));
-
     }
 
 }

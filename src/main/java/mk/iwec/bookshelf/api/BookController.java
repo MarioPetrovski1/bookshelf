@@ -35,8 +35,8 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public BookDto create(@RequestBody BookDto bookDto) {
-        return service.create(bookDto);
+    public BookInfoDto create(@RequestBody BookDto bookDto) {
+        return new BookInfoDto(mapper.dtoToEntity(service.create(bookDto)));
     }
 
     @PutMapping("/{id}")
