@@ -2,12 +2,14 @@ package mk.iwec.bookshelf.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import mk.iwec.bookshelf.domain.Author;
+import mk.iwec.bookshelf.domain.Publisher;
 import mk.iwec.bookshelf.dto.AuthorDto;
 import mk.iwec.bookshelf.dto.BookDto;
 import mk.iwec.bookshelf.infrastucture.exception.ResourceNotFoundException;
 import mk.iwec.bookshelf.mapper.AuthorMapper;
 import mk.iwec.bookshelf.mapper.BookMapper;
 import mk.iwec.bookshelf.repository.AuthorRepository;
+import mk.iwec.bookshelf.repository.PublisherRepository;
 import mk.iwec.bookshelf.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class AuthorServiceImpl implements GenericService<AuthorDto, Integer> {
 
     @Autowired
     private BookMapper bookMapper;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
 
 
     @Override
@@ -73,8 +78,19 @@ public class AuthorServiceImpl implements GenericService<AuthorDto, Integer> {
             log.error("Resource Author with id {} is not found", id);
             return new ResourceNotFoundException("Resource Author not found");
         });
+
+        if (bookDto.getPublisher().getId() != null) {
+            Publisher publisher = publisherRepository.findById(bookDto.getPublisher().getId()).orElseThrow(() -> {
+                log.error("Resource Publisher with id {} is not found", id);
+                return new ResourceNotFoundException("Resource Author not found");
+            });
+            bookDto.setPublisher(publisher);
+        }
+
+
         entity.addBook(bookMapper.dtoToEntity(bookDto));
         return authorMapper.entityToDto(repository.saveAndFlush(entity));
+
 
     }
 }
