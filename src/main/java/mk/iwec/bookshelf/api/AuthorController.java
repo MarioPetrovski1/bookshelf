@@ -3,6 +3,7 @@ package mk.iwec.bookshelf.api;
 import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.dto.AuthorDto;
 import mk.iwec.bookshelf.dto.AuthorInfoDto;
+import mk.iwec.bookshelf.dto.BookDto;
 import mk.iwec.bookshelf.infrastucture.Endpoints;
 import mk.iwec.bookshelf.mapper.AuthorMapper;
 import mk.iwec.bookshelf.service.impl.AuthorServiceImpl;
@@ -37,6 +38,12 @@ public class AuthorController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public AuthorDto create(@RequestBody AuthorDto authorDto) {
         return service.create(authorDto);
+    }
+
+    @PostMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public AuthorInfoDto addNewBook(@PathVariable(value = "id") Integer id, @RequestBody BookDto bookDto) {
+        return new AuthorInfoDto(mapper.dtoToEntity(service.addNewBook(id, bookDto)));
     }
 
     @PutMapping("/{id}")

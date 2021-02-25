@@ -3,8 +3,10 @@ package mk.iwec.bookshelf.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.dto.AuthorDto;
+import mk.iwec.bookshelf.dto.BookDto;
 import mk.iwec.bookshelf.infrastucture.exception.ResourceNotFoundException;
 import mk.iwec.bookshelf.mapper.AuthorMapper;
+import mk.iwec.bookshelf.mapper.BookMapper;
 import mk.iwec.bookshelf.repository.AuthorRepository;
 import mk.iwec.bookshelf.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AuthorServiceImpl implements GenericService<AuthorDto, Integer> {
 
     @Autowired
     private AuthorMapper authorMapper;
+
+    @Autowired
+    private BookMapper bookMapper;
 
 
     @Override
@@ -61,5 +66,15 @@ public class AuthorServiceImpl implements GenericService<AuthorDto, Integer> {
     public void deleteById(Integer id) {
         log.debug("Execute deleteById Author with parameters {}", id);
         repository.deleteById(id);
+    }
+
+    public AuthorDto addNewBook(Integer id, BookDto bookDto) {
+        Author entity = repository.findById(id).orElseThrow(() -> {
+            log.error("Resource Author with id {} is not found", id);
+            return new ResourceNotFoundException("Resource Author not found");
+        });
+        entity.addBook(bookMapper.dtoToEntity(bookDto));
+        return authorMapper.entityToDto(repository.saveAndFlush(entity));
+
     }
 }

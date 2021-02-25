@@ -45,5 +45,9 @@ public class Author extends BaseObject {
         }
     }
 
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
+
 
 }
