@@ -1,16 +1,19 @@
 package mk.iwec.bookshelf.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.domain.Book;
 import mk.iwec.bookshelf.dto.BookDto;
 import mk.iwec.bookshelf.dto.BookShortInfoWithPublisher;
 import mk.iwec.bookshelf.dto.PublisherDto;
 import mk.iwec.bookshelf.mapper.BookMapper;
 import mk.iwec.bookshelf.mapper.PublisherMapper;
+import mk.iwec.bookshelf.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,9 @@ public class PublisherServiceImpl implements GenericService<PublisherDto, Intege
 
     @Autowired
     private BookMapper bookMapper;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Override
     public PublisherDto findById(Integer id) {
@@ -77,6 +83,24 @@ public class PublisherServiceImpl implements GenericService<PublisherDto, Intege
             log.error("Resource Publisher with id {} is not found", id);
             return new ResourceNotFoundException("Resource Publisher not found");
         });
+        List<Author> authors = book.getAuthors();
+
+        List<Author> persistedAuthors = new ArrayList<>();
+        for (Author a : authors) {
+            if (a.getId() != null) {
+                Author author = authorRepository.findById(a.getId()).orElseThrow(() -> {
+                    log.error("Resource Author with id {} is not found", a.getId());
+                    return new ResourceNotFoundException("Resource Author not found");
+                });
+                if (author != null) {
+                    persistedAuthors.add(author);
+                }
+            }
+        }
+        if (persistedAuthors.size() > 0) {
+            book.setAuthors(persistedAuthors);
+        }
+
         List<BookDto> books = bookMapper.mapList(entity.getBooks(), BookDto.class);
         books.add(book);
         entity.setBooks(bookMapper.mapList(books, Book.class));
