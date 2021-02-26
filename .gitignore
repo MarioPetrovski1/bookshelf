@@ -1,17 +1,17 @@
 # IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
+backend/.idea
+backend/.project
+backend/.classpath
+backend/.c9/
 *.launch
-.settings/
+backend/.settings/
 *.sublime-workspace
 
-/target/
-/.settings/
-.project
+backend/target/
+backend/.settings/
+backend/.project
 
 
 ###
-bin/
-log/
+backend/bin/
+backend/log/
