@@ -29,20 +29,13 @@ public class PublisherInfoDto {
             this.name = publisher.getName();
             this.country = publisher.getCountry();
             books = new ArrayList<>();
-
-            List<Book> tempBooks = publisher.getBooks();
-            for (Book b : tempBooks) {
-                if (b.getAuthors() != null) {
-                    List<AuthorShortInfoDto> authors = new ArrayList<>();
-                    for (Author a : b.getAuthors()) {
-                        AuthorShortInfoDto author = new AuthorShortInfoDto(a.getId(), a.getFirstName(), a.getLastName());
-                        authors.add(author);
-                    }
-                    BookShortInfoWithAuthors book = new BookShortInfoWithAuthors(b.getId(), b.getTitle(), b.getIsbn(), b.getGenre(), authors);
-                    books.add(book);
-                }
-
-            }
+            publisher.getBooks().stream().filter(book -> book.getAuthors() != null)
+                    .forEach(book -> {
+                        List<AuthorShortInfoDto> authors = new ArrayList<>();
+                        book.getAuthors().forEach(author -> authors.add(new AuthorShortInfoDto(author.getId(), author.getFirstName(), author.getLastName())));
+                        BookShortInfoWithAuthors tempBook = new BookShortInfoWithAuthors(book.getId(), book.getTitle(), book.getIsbn(), book.getGenre(), authors);
+                        books.add(tempBook);
+                    });
         }
     }
 

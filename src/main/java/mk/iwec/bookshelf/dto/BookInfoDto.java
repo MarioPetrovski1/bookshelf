@@ -37,11 +37,8 @@ public class BookInfoDto {
             this.genre = book.getGenre();
             authors = new ArrayList<>();
             publisher = new PublisherShortInfoDto(book.getPublisher().getId(), book.getPublisher().getName(), book.getPublisher().getCountry());
-            List<Author> tempAuthors = book.getAuthors();
-            for (Author a : tempAuthors) {
-                AuthorShortInfoDto author = new AuthorShortInfoDto(a.getId(), a.getFirstName(), a.getLastName());
-                authors.add(author);
-            }
+            book.getAuthors().forEach(author -> authors.add(new AuthorShortInfoDto(author.getId(), author.getFirstName(), author.getLastName())));
+
         }
     }
 

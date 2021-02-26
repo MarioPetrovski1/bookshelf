@@ -94,22 +94,23 @@ public class PublisherServiceImpl implements GenericService<PublisherDto, Intege
     }
 
     public static void checkForAuthors(BookDto book, AuthorRepository authorRepository, Logger log) {
-        List<Author> authors = book.getAuthors();
         List<Author> persistedAuthors = new ArrayList<>();
-        for (Author a : authors) {
-            if (a.getId() != null) {
-                Author author = authorRepository.findById(a.getId()).orElseThrow(() -> {
-                    log.error("Resource Author with id {} is not found", a.getId());
-                    return new ResourceNotFoundException("Resource Author not found");
-                });
-                if (author != null) {
-                    persistedAuthors.add(author);
-                }
-            }
-        }
-        if (persistedAuthors.size() > 0) {
-            book.setAuthors(persistedAuthors);
-        }
-    }
 
+        book.getAuthors().stream().filter(author -> author.getId() != null).forEach(author -> {
+            Author tempAuthor = authorRepository.findById(author.getId()).orElseThrow(() -> {
+                log.error("Resource Author with id {} is not found", author.getId());
+                return new ResourceNotFoundException("Resource Author not found");
+            });
+
+            if (tempAuthor != null) {
+                persistedAuthors.add(tempAuthor);
+            }
+
+            if (persistedAuthors.size() > 0) {
+                book.setAuthors(persistedAuthors);
+            }
+        });
+        
+
+    }
 }
