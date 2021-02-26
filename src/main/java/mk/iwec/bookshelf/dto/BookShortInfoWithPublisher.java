@@ -14,8 +14,8 @@ public class BookShortInfoWithPublisher extends BookShortInfoDto {
     private PublisherShortInfoDto publisher;
 
     @Builder
-    public BookShortInfoWithPublisher(Integer id, String title, String isbn, Book.Genre genre, PublisherShortInfoDto publisher) {
-        super(id, title, isbn, genre);
+    public BookShortInfoWithPublisher(Integer id, String title, String isbn, String category, PublisherShortInfoDto publisher) {
+        super(id, title, isbn, category);
         this.publisher = publisher;
     }
 }

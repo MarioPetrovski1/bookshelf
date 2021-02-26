@@ -23,9 +23,8 @@ public class Book extends BaseObject {
     private String isbn;
 
     @NonNull
-    @Column(name = "genre")
-    @Enumerated(EnumType.STRING)
-    private Genre genre;
+    @Column(name = "category")
+    private String category;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "book_authors",
@@ -39,26 +38,6 @@ public class Book extends BaseObject {
             inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
     private Publisher publisher;
 
-
-    public enum Genre {
-        CRIME("Crime"),
-        FANTASY("Fantasy"),
-        ROMANCE("Romance"),
-        SCIENCE("Science fiction"),
-        WESTERN("Western"),
-        HORROR("Horror"),
-        POETRY("Poetry");
-
-        private final String name;
-
-        Genre(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 
 
 }

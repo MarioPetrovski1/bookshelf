@@ -30,7 +30,6 @@ public class AuthorMapperImpl extends AbstractGeneralMapper implements AuthorMap
     public void mapRequestedFieldForUpdate(Author entity, AuthorDto dto) {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
-        entity.setSex(dto.getSex());
         entity.setBooks(dto.getBooks());
     }
 }

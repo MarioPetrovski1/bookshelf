@@ -12,7 +12,6 @@ public class AuthorTestUtil {
         mock.setId(1);
         mock.setFirstName("Mock FirstName");
         mock.setLastName("Mock LastName");
-        mock.setSex(Author.Sex.MALE);
         return mock;
     }
 

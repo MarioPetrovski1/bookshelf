@@ -26,25 +26,6 @@ public class Author extends BaseObject {
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     private List<Book> books;
 
-    @Column(name = "sex", nullable = false, length = 100)
-    @Enumerated(EnumType.STRING)
-    private Sex sex;
-
-    public enum Sex {
-        MALE("Male"),
-        FEMALE("Female");
-
-        private final String name;
-
-        Sex(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
     public void addBook(Book book) {
         this.books.add(book);
     }

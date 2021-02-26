@@ -33,7 +33,7 @@ public class PublisherInfoDto {
                     .forEach(book -> {
                         List<AuthorShortInfoDto> authors = new ArrayList<>();
                         book.getAuthors().forEach(author -> authors.add(new AuthorShortInfoDto(author.getId(), author.getFirstName(), author.getLastName())));
-                        BookShortInfoWithAuthors tempBook = new BookShortInfoWithAuthors(book.getId(), book.getTitle(), book.getIsbn(), book.getGenre(), authors);
+                        BookShortInfoWithAuthors tempBook = new BookShortInfoWithAuthors(book.getId(), book.getTitle(), book.getIsbn(), book.getCategory(), authors);
                         books.add(tempBook);
                     });
         }

@@ -16,7 +16,7 @@ public class BookDto {
 
     private String isbn;
 
-    private Book.Genre genre;
+    private String category;
 
     private List<Author> authors;
 

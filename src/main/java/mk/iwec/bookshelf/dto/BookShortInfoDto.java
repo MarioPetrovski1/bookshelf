@@ -16,5 +16,5 @@ public class BookShortInfoDto {
 
     private String isbn;
 
-    private Book.Genre genre;
+    private String category;
 }

@@ -21,8 +21,6 @@ public class AuthorInfoDto {
 
     private String lastName;
 
-    private Author.Sex sex;
-
     private List<BookShortInfoWithPublisher> books;
 
     public AuthorInfoDto(Author author) {
@@ -30,17 +28,16 @@ public class AuthorInfoDto {
             this.id = author.getId();
             this.firstName = author.getFirstName();
             this.lastName = author.getLastName();
-            this.sex = author.getSex();
             books = new ArrayList<>();
             author.getBooks().stream().filter(book -> book.getPublisher() != null)
                     .forEach(book -> books.add(new BookShortInfoWithPublisher(
-                            book.getId(), book.getTitle(), book.getIsbn(), book.getGenre(),
+                            book.getId(), book.getTitle(), book.getIsbn(), book.getCategory(),
                             new PublisherShortInfoDto(book.getPublisher().getId(), book.getPublisher().getName(), book.getPublisher().getCountry())
                     )));
 
             author.getBooks().stream().filter(book -> book.getPublisher() == null)
                     .forEach(book -> books.add(new BookShortInfoWithPublisher(
-                            book.getId(), book.getTitle(), book.getIsbn(), book.getGenre(), null
+                            book.getId(), book.getTitle(), book.getIsbn(), book.getCategory(), null
                     )));
         }
     }

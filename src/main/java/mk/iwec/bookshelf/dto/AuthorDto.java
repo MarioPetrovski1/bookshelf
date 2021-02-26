@@ -17,7 +17,6 @@ public class AuthorDto {
 
     private List<Book> books;
 
-    private Author.Sex sex;
 
 
 }

@@ -16,8 +16,8 @@ public class BookShortInfoWithAuthors extends BookShortInfoDto {
     private List<AuthorShortInfoDto> authors;
 
     @Builder
-    public BookShortInfoWithAuthors(Integer id, String title, String isbn, Book.Genre genre, List<AuthorShortInfoDto> authors) {
-        super(id, title, isbn, genre);
+    public BookShortInfoWithAuthors(Integer id, String title, String isbn, String category, List<AuthorShortInfoDto> authors) {
+        super(id, title, isbn, category);
         this.authors = authors;
     }
 }

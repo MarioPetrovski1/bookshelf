@@ -22,7 +22,7 @@ public class BookInfoDto {
 
     private String isbn;
 
-    private Book.Genre genre;
+    private String category;
 
     private List<AuthorShortInfoDto> authors;
 
@@ -34,7 +34,7 @@ public class BookInfoDto {
             this.id = book.getId();
             this.title = book.getTitle();
             this.isbn = book.getIsbn();
-            this.genre = book.getGenre();
+            this.category = book.getCategory();
             authors = new ArrayList<>();
             publisher = new PublisherShortInfoDto(book.getPublisher().getId(), book.getPublisher().getName(), book.getPublisher().getCountry());
             book.getAuthors().forEach(author -> authors.add(new AuthorShortInfoDto(author.getId(), author.getFirstName(), author.getLastName())));

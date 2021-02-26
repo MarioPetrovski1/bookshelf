@@ -30,7 +30,7 @@ public class BookMapperImpl extends AbstractGeneralMapper implements BookMapper 
     public void mapRequestedFieldForUpdate(Book entity, BookDto dto) {
         entity.setTitle(dto.getTitle());
         entity.setIsbn(dto.getIsbn());
-        entity.setGenre(dto.getGenre());
+        entity.setCategory(dto.getCategory());
         entity.setAuthors(dto.getAuthors());
         entity.setPublisher(dto.getPublisher());
     }
