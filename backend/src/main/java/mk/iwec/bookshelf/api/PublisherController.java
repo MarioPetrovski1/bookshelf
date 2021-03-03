@@ -3,9 +3,7 @@ package mk.iwec.bookshelf.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import mk.iwec.bookshelf.domain.Book;
 import mk.iwec.bookshelf.dto.BookDto;
-import mk.iwec.bookshelf.dto.BookShortInfoWithPublisher;
 import mk.iwec.bookshelf.dto.PublisherDto;
 import mk.iwec.bookshelf.dto.PublisherInfoDto;
 import mk.iwec.bookshelf.mapper.PublisherMapper;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import mk.iwec.bookshelf.domain.Publisher;
 import mk.iwec.bookshelf.infrastucture.Endpoints;
 import mk.iwec.bookshelf.service.impl.PublisherServiceImpl;
 

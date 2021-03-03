@@ -1,6 +1,5 @@
 package mk.iwec.bookshelf.api;
 
-import mk.iwec.bookshelf.domain.Book;
 import mk.iwec.bookshelf.dto.BookDto;
 import mk.iwec.bookshelf.dto.BookInfoDto;
 import mk.iwec.bookshelf.infrastucture.Endpoints;

@@ -3,12 +3,9 @@ package mk.iwec.bookshelf.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mk.iwec.bookshelf.domain.Author;
 import mk.iwec.bookshelf.domain.Book;
-import mk.iwec.bookshelf.domain.Publisher;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Data
