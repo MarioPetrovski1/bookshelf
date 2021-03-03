@@ -10,7 +10,7 @@ const Book = props => (
         <td>{props.book.publisher.name}</td>
         <td>{props.book.authors[0].firstName} {props.book.authors[0].lastName}</td>
         <td>
-            <Link to={"/edit/" + props.book.id}>edit</Link> | <button onClick={() => { props.deleteBook(props.book.id) }} className="btn btn-danger">DELETE</button>
+            <Link to={"/edit/" + props.book.id}>edit</Link> | <button onClick={() => { props.deleteBook(props.book.id) }} className="btn btn-danger">DELETE</button> | <button onClick={() => { props.getBook(props.book.fileName) }} className="btn btn-primary">View book</button>
         </td>
     </tr>
 )
@@ -42,6 +42,8 @@ const Publisher = props => (
 export default class BooksList extends Component {
     constructor(props) {
         super(props);
+
+        this.getBook = this.getBook.bind(this);
 
         this.deleteBook = this.deleteBook.bind(this);
         this.deleteAuthor = this.deleteAuthor.bind(this);
@@ -80,9 +82,31 @@ export default class BooksList extends Component {
 
     }
 
+    getBook(fileName) {
+        axios(`http://localhost:8082/api/download/`, {
+            method: "POST",
+            responseType: "blob",
+            data: {
+                fileName: fileName
+            }
+        })
+            .then(response => {
+                const file = new Blob([response.data], {
+                    type: "application/pdf"
+                });
+                const fileURL = URL.createObjectURL(file);
+                window.open(fileURL);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     deleteBook(id) {
         axios.delete('http://localhost:8082/api/books/' + id)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e));
+
         this.setState({
             books: this.state.books.filter(el => el.id !== id)
         })
@@ -90,7 +114,8 @@ export default class BooksList extends Component {
 
     deleteAuthor(id) {
         axios.delete('http://localhost:8082/api/authors/' + id)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e));
         this.setState({
             authors: this.state.authors.filter(el => el.id !== id)
         })
@@ -98,7 +123,8 @@ export default class BooksList extends Component {
 
     deletePublisher(id) {
         axios.delete('http://localhost:8082/api/publishers/' + id)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e));
         this.setState({
             publishers: this.state.publishers.filter(el => el.id !== id)
         })
@@ -106,7 +132,7 @@ export default class BooksList extends Component {
 
     booksList() {
         return this.state.books.map(currentbook => {
-            return <Book book={currentbook} deleteBook={this.deleteBook} key={currentbook.id} />;
+            return <Book book={currentbook} deleteBook={this.deleteBook} getBook={this.getBook} key={currentbook.id} />;
         })
     }
 
@@ -125,7 +151,7 @@ export default class BooksList extends Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="container">
                     <h3>Books</h3>
                     <table className="table">
                         <thead className="thead-light">
@@ -142,7 +168,7 @@ export default class BooksList extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div>
+                <div className="container">
                     <h3>Authors</h3>
                     <table className="table">
                         <thead className="thead-light">
@@ -156,7 +182,7 @@ export default class BooksList extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div>
+                <div className="container">
                     <h3>Publishers</h3>
                     <table className="table">
                         <thead className="thead-light">

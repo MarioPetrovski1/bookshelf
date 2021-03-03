@@ -122,7 +122,7 @@ export default class EditPublisher extends Component {
             <div>
                 <h3>Edit Publisher</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Name: </label>
                         <input type="text"
                             required
@@ -131,7 +131,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Country: </label>
                         <input type="text"
                             required
@@ -140,7 +140,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeCountry}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book title: </label>
                         <input type="text"
                             required
@@ -149,7 +149,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeBookTitle}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book isbn: </label>
                         <input type="text"
                             required
@@ -158,7 +158,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeBookIsbn}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book category: </label>
                         <input type="text"
                             required
@@ -167,7 +167,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeBookCategory}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Author First Name: </label>
                         <input type="text"
                             required
@@ -176,7 +176,7 @@ export default class EditPublisher extends Component {
                             onChange={this.onChangeAuthorFirstName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Author Last Name: </label>
                         <input type="text"
                             required
@@ -186,7 +186,7 @@ export default class EditPublisher extends Component {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="col-md-6" style={{ marginTop: '10px' }}>
                         <input type="submit" value="Edit Publisher" className="btn btn-primary" />
                     </div>
                 </form>

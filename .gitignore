@@ -8,6 +8,7 @@ backend/.c9/
 backend/.settings/
 *.sublime-workspace
 
+backend/uploads/
 backend/target/
 backend/.settings/
 backend/.project

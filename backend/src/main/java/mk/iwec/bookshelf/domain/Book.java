@@ -38,6 +38,9 @@ public class Book extends BaseObject {
             inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
     private Publisher publisher;
 
+    @Column(name = "file")
+    private String fileName;
+
 
 
 }

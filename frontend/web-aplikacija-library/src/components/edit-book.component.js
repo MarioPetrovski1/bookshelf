@@ -127,7 +127,7 @@ export default class EditBook extends Component {
             <div>
                 <h3>Edit Book</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Title: </label>
                         <input type="text"
                             required
@@ -136,7 +136,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangeTitle}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Isbn: </label>
                         <input type="text"
                             required
@@ -145,7 +145,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangeIsbn}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Category: </label>
                         <input type="text"
                             required
@@ -154,7 +154,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangeCategory}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Publisher Name: </label>
                         <input type="text"
                             required
@@ -163,7 +163,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangePublisherName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Publisher Country: </label>
                         <input type="text"
                             required
@@ -172,7 +172,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangePublisherCountry}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Author First Name: </label>
                         <input type="text"
                             required
@@ -181,7 +181,7 @@ export default class EditBook extends Component {
                             onChange={this.onChangeAuthorFirstName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Author Last Name: </label>
                         <input type="text"
                             required
@@ -191,7 +191,7 @@ export default class EditBook extends Component {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="col-md-6" style={{ marginTop: '10px' }}>
                         <input type="submit" value="Edit Book" className="btn btn-primary" />
                     </div>
                 </form>

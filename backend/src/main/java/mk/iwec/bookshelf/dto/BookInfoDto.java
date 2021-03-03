@@ -24,6 +24,8 @@ public class BookInfoDto {
 
     private String category;
 
+    private String fileName;
+
     private List<AuthorShortInfoDto> authors;
 
     private PublisherShortInfoDto publisher;
@@ -35,6 +37,7 @@ public class BookInfoDto {
             this.title = book.getTitle();
             this.isbn = book.getIsbn();
             this.category = book.getCategory();
+            this.fileName = book.getFileName();
             authors = new ArrayList<>();
             publisher = new PublisherShortInfoDto(book.getPublisher().getId(), book.getPublisher().getName(), book.getPublisher().getCountry());
             book.getAuthors().forEach(author -> authors.add(new AuthorShortInfoDto(author.getId(), author.getFirstName(), author.getLastName())));
