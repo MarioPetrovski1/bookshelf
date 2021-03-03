@@ -22,5 +22,7 @@ public class BookDto {
 
     private Publisher publisher;
 
+    private String fileName;
+
 
 }

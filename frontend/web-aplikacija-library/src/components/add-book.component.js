@@ -11,6 +11,7 @@ export default class CreateBook extends Component {
         this.onChangeCategory = this.onChangeCategory.bind(this);
         this.onChangePublisher = this.onChangePublisher.bind(this);
         this.onChangeAuthor = this.onChangeAuthor.bind(this);
+        this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -20,7 +21,9 @@ export default class CreateBook extends Component {
             authors: [],
             publishers: [],
             publisher: {},
-            authorForPost: []
+            authorForPost: [],
+            selectedFile: null,
+            fileName: ''
         }
     }
 
@@ -82,6 +85,23 @@ export default class CreateBook extends Component {
         document.getElementById("publisherSelect").remove();
     }
 
+    onFileChangeHandler(e) {
+        e.preventDefault();
+        this.setState({
+            selectedFile: e.target.files[0],
+            fileName: e.target.files[0].name
+        });
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+        axios.post('http://localhost:8082/api/upload', formData)
+            .then(res => {
+                console.log(res.data);
+                alert("File uploaded successfully.")
+            })
+            .catch(e => console.log(e));
+
+    };
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -91,7 +111,7 @@ export default class CreateBook extends Component {
             category: this.state.category,
             authors: this.state.authorForPost,
             publisher: this.state.publisher,
-
+            fileName: this.state.fileName
         }
 
         axios.post('http://localhost:8082/api/books/', book)
@@ -107,7 +127,7 @@ export default class CreateBook extends Component {
             <div>
                 <h3>Add Book</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Title: </label>
                         <input type="text"
                             required
@@ -116,7 +136,7 @@ export default class CreateBook extends Component {
                             onChange={this.onChangeTitle}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Isbn: </label>
                         <input type="text"
                             required
@@ -125,7 +145,7 @@ export default class CreateBook extends Component {
                             onChange={this.onChangeIsbn}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Category: </label>
                         <input type="text"
                             required
@@ -134,7 +154,7 @@ export default class CreateBook extends Component {
                             onChange={this.onChangeCategory}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Choose Publisher </label>
                         <select
                             required
@@ -149,7 +169,7 @@ export default class CreateBook extends Component {
                             }
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Choose Author </label>
                         <select
                             required
@@ -164,8 +184,14 @@ export default class CreateBook extends Component {
                             }
                         </select>
                     </div>
+                    <div className="col-md-6">
+                        <div className="form-group files color">
+                            <label>Upload Book </label>
+                            <input type="file" className="form-control" name="file" onChange={this.onFileChangeHandler} />
+                        </div>
+                    </div>
 
-                    <div className="form-group">
+                    <div className="col-md-6" style={{ marginTop: '10px' }}>
                         <input type="submit" value="Add Book" className="btn btn-primary" />
                     </div>
                 </form>

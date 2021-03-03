@@ -108,7 +108,7 @@ export default class CreateAuthor extends Component {
             <div>
                 <h3>Create New Author</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>First Name: </label>
                         <input type="text"
                             required
@@ -117,7 +117,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangeFirstName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Last Name: </label>
                         <input type="text"
                             required
@@ -126,7 +126,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangeLastName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book title: </label>
                         <input type="text"
                             required
@@ -135,7 +135,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangeBookTitle}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book isbn: </label>
                         <input type="text"
                             required
@@ -144,7 +144,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangeBookIsbn}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Book category: </label>
                         <input type="text"
                             required
@@ -153,7 +153,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangeBookCategory}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Publisher name: </label>
                         <input type="text"
                             required
@@ -162,7 +162,7 @@ export default class CreateAuthor extends Component {
                             onChange={this.onChangePublisherName}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-6">
                         <label>Publisher country: </label>
                         <input type="text"
                             required
@@ -172,7 +172,7 @@ export default class CreateAuthor extends Component {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="col-md-6" style={{ marginTop: '10px' }}>
                         <input type="submit" value="Create Author" className="btn btn-primary" />
                     </div>
                 </form>

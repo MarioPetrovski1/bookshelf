@@ -11,4 +11,7 @@ public class Endpoints {
 	public static final String BOOKS = BASE + "books/";
 	public static final String AUTHORS = BASE + "authors/";
 
+	public static final String UPLOAD_FILE = BASE + "/upload";
+	public static final String DOWNLOAD_FILE = BASE + "/download";
+
 }
