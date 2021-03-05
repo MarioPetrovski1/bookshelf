@@ -28,4 +28,9 @@ public class FileController {
         return service.downloadFile(fileName);
     }
 
+    @DeleteMapping(Endpoints.DELETE_FILE + "{fileName}")
+    public ResponseEntity deleteFile(@PathVariable String fileName) throws IOException {
+        return service.deleteFile(fileName);
+    }
+
 }

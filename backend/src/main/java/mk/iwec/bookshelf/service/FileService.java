@@ -11,4 +11,6 @@ public interface FileService {
 
     ResponseEntity downloadFile(String fileName) throws IOException;
 
+    ResponseEntity deleteFile(String fileName) throws IOException;
+
 }

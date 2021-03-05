@@ -1,5 +1,6 @@
 package mk.iwec.bookshelf.repository.impl;
 
+import mk.iwec.bookshelf.infrastucture.exception.ResourceNotFoundException;
 import mk.iwec.bookshelf.repository.FileRepository;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -41,5 +42,20 @@ public class FileRepositoryImpl implements FileRepository {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .contentLength(file.length())
                 .body(resource);
+    }
+
+    @Override
+    public ResponseEntity deleteFile(String fileName) throws IOException {
+        String fileForDelete = FILES_DIR + fileName;
+
+        File file = new File(fileForDelete);
+        if (file.delete()) {
+            return ResponseEntity.ok()
+                    .body("File deleted : " + fileForDelete);
+        } else {
+            return ResponseEntity.ok()
+                    .body("File not found");
+        }
+
     }
 }

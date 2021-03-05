@@ -10,7 +10,7 @@ const Book = props => (
         <td>{props.book.publisher.name}</td>
         <td>{props.book.authors[0].firstName} {props.book.authors[0].lastName}</td>
         <td>
-            <Link to={"/edit/" + props.book.id}>edit</Link> | <button onClick={() => { props.deleteBook(props.book.id) }} className="btn btn-danger">DELETE</button> | <button onClick={() => { props.getBook(props.book.fileName) }} className="btn btn-primary">View book</button>
+            <Link to={"/edit/" + props.book.id}>edit</Link> | <button onClick={() => { props.deleteBook(props.book.id, props.book.fileName) }} className="btn btn-danger">DELETE</button> | <button onClick={() => { props.getBook(props.book.fileName) }} className="btn btn-primary">View book</button>
         </td>
     </tr>
 )
@@ -83,7 +83,7 @@ export default class BooksList extends Component {
     }
 
     getBook(fileName) {
-        axios(`http://localhost:8082/api/download/`, {
+        axios(`http://localhost:8082/api/files/download/`, {
             method: "POST",
             responseType: "blob",
             data: {
@@ -102,10 +102,15 @@ export default class BooksList extends Component {
             });
     }
 
-    deleteBook(id) {
+    deleteBook(id, fileName) {
+        axios.delete('http://localhost:8082/api/files/delete/' + fileName)
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e));
+
         axios.delete('http://localhost:8082/api/books/' + id)
             .then(res => console.log(res.data))
             .catch(e => console.log(e));
+
 
         this.setState({
             books: this.state.books.filter(el => el.id !== id)

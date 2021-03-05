@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Author extends BaseObject {
+public class  Author extends BaseObject {
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;

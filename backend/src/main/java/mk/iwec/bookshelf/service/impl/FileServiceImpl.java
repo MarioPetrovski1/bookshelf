@@ -31,4 +31,10 @@ public class FileServiceImpl implements FileService {
         return repository.downloadFile(fileName);
     }
 
+    @Override
+    public ResponseEntity deleteFile(String fileName) throws IOException {
+        log.info(String.format("File name '%s' is deleting.", fileName));
+        return repository.deleteFile(fileName);
+    }
+
 }

@@ -88,7 +88,7 @@ export default class CreateBook extends Component {
         });
         const formData = new FormData();
         formData.append('file', e.target.files[0]);
-        axios.post('http://localhost:8082/api/upload', formData)
+        axios.post('http://localhost:8082/api/files/upload/', formData)
             .then(res => {
                 console.log(res.data);
                 alert("File uploaded successfully.")
