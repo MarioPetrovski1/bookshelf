@@ -24,6 +24,7 @@ backend/log/
 frontend/*/node_modules
 frontend/*/.pnp
 frontend/*/.pnp.js
+frontend/*/.eslintcache
 
 # testing
 frontend/*/coverage
